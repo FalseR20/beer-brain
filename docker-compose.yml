@@ -1,0 +1,32 @@
+services:
+  django:
+    build: ./beer-brain-back
+    command: gunicorn beer_brain.wsgi -b '0.0.0.0:8000'
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    env_file:
+      - .env
+    volumes:
+      - pgdbdata:/var/lib/postgresql/data/
+
+  vite:
+    build:
+      context: ./beer-brain-front
+      args:
+        - VITE_DJANGO_URL=${VITE_DJANGO_URL}
+    ports:
+      - "4173:4173"
+    depends_on:
+      - django
+    env_file:
+      - .env
+
+volumes:
+  pgdbdata: null
