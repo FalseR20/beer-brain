@@ -1,0 +1,8 @@
+[submodule "beer-brain-back"]
+	path = beer-brain-back
+	url = ../beer-brain-back.git
+	branch = main
+[submodule "beer-brain-front"]
+	path = beer-brain-front
+	url = ../beer-brain-front.git
+	branch = main
